@@ -1,28 +1,21 @@
-package br.com.anhezini;
+package br.com.anhezini.vector;
 
-import java.util.ArrayList;
+import br.com.anhezini.shared.List;
 
 import static java.lang.System.arraycopy;
 
-public class Vector<T> {
-
-    public static void main(String[] args) {
-        var myVector = new Vector<String>();
-        myVector.add("foo");
-        myVector.add("bar");
-        myVector.add("zux");
-        myVector.remove(0);
-        System.out.println(myVector);
-    }
+public class Vector<T> implements List<T> {
 
     public Object[] items = new Object[3];
 
     private int total = 0;
 
+    @Override
     public void add(T t) {
         add(this.total, t);
     }
 
+    @Override
     public void add(int index, T t) {
         validAddIndex(index);
         increaseSize();
@@ -51,13 +44,14 @@ public class Vector<T> {
         }
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public T get(int index) {
         validFilledIndex(index);
         return (T) this.items[index];
     }
 
-
+    @Override
     public void remove(int index) {
         validFilledIndex(index);
         for (int i = index; i < this.total; i++) {
@@ -76,6 +70,7 @@ public class Vector<T> {
         }
     }
 
+    @Override
     public boolean contains(T t) {
         var hasItem = false;
         for (int i = 0; i < this.total; i++) {
@@ -87,6 +82,7 @@ public class Vector<T> {
         return hasItem;
     }
 
+    @Override
     public int size() {
         return this.total;
     }
