@@ -9,5 +9,8 @@
         <module name="data-structures" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="data-structures" target="15" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -13,18 +13,18 @@ public class LinkedList<T> implements List<T> {
     private int total = 0;
 
     private boolean hasNode(int index) {
-        return index > 0 && index < this.total;
+        return index >= 0 && index < this.total;
     }
 
-    private void validIndex(int index) {
-        if (hasNode(index)) {
+    private void validHasIndex(int index) {
+        if (!hasNode(index)) {
             throw new IllegalArgumentException("Invalid index");
         }
     }
 
 
     private Node getNode(int index) {
-        validIndex(index);
+        validHasIndex(index);
         var node = this.first;
         for (int i = 0; i < index; i++) {
             node = node.getNext();
@@ -69,12 +69,12 @@ public class LinkedList<T> implements List<T> {
     @Override
     @SuppressWarnings("unchecked")
     public T get(int index) {
-        return (T) getNode(index);
+        return (T) getNode(index).getElement();
     }
 
     @Override
     public void remove(int index) {
-        validIndex(index);
+        validHasIndex(index);
         if(index == 0){
             removeFirst();
         }else if(index == this.total){
@@ -90,7 +90,7 @@ public class LinkedList<T> implements List<T> {
     }
 
     public void removeFirst() {
-        validIndex(0);
+        validHasIndex(0);
         this.first = this.first.getNext();
         total--;
         if (this.total == 0) {
@@ -99,7 +99,7 @@ public class LinkedList<T> implements List<T> {
     }
 
     public void removeLast() {
-        validIndex(this.total - 1);
+        validHasIndex(this.total - 1);
         if (this.total == 1) {
             removeFirst();
         } else {
